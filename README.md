@@ -101,7 +101,7 @@ Pynvx is provided under MIT License, see LICENSE file.
 
 ## Test & Example
 
-See [tests\test.py](https://github.com/1132719438/pynvx/blob/master/tests/test.py) and [tests\info.py](https://github.com/1132719438/pynvx/blob/master/tests/info.py).
+See [test.py](https://github.com/1132719438/pynvx/blob/master/tests/test.py) and [info.py](https://github.com/1132719438/pynvx/blob/master/tests/info.py).
 
 [FAQ]: http://pybind11.rtfd.io/en/latest/faq.html#working-with-ancient-visual-studio-2009-builds-on-windows
 [vs2015_runtime]: https://www.microsoft.com/en-us/download/details.aspx?id=48145
