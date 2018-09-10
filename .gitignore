@@ -1,0 +1,15 @@
+build/
+dist/
+_build/
+_generate/
+*.so
+*.py[cod]
+*.egg-info
+.pytest_cache
+.cache
+
+# MacOS
+.DS_Store
+
+# IDE
+.idea
