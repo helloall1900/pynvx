@@ -29,5 +29,5 @@ test:
     - pynvx
 
 about:
-  summary: An example project built with pybind11.
+  summary: Python bindings for NVIDIA CUDA APIs.
   license_file: LICENSE
