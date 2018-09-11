@@ -67,7 +67,7 @@ def open_file(path, mode="r", encoding="UTF-8"):
 
 setup(
     name='pynvx',
-    version='0.0.3',
+    version='0.0.4',
     keywords=("cuda", "python", "nvidia", "gpu", "macos", "OS X"),
     license="MIT Licence",
 
