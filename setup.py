@@ -57,6 +57,14 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 
+def open_file(path, mode="r", encoding="UTF-8"):
+    if sys.version_info[0] == 2:
+        import io
+        return io.open(path, mode=mode, encoding=encoding)
+    else:
+        return open(path, mode=mode, encoding=encoding)
+
+
 setup(
     name='pynvx',
     version='0.0.3',
@@ -66,7 +74,7 @@ setup(
     author='lijinpeng',
     author_email='lijinpeng1132@gmail.com',
     description='Python bindings for NVIDIA CUDA APIs.',
-    long_description=open("README.rst", encoding='UTF-8').read(),
+    long_description=open_file("README.rst").read(),
     url='https://github.com/1132719438/pynvx.git',
 
     ext_modules=[CMakeExtension('pynvx')],
