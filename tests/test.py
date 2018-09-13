@@ -5,8 +5,10 @@ import pynvx as m
 
 if sys.version_info[0] == 2:
     string_types = basestring
+    integer_types = [int, long]
 else:
     string_types = str
+    integer_types = [int]
 
 
 def test_version():
@@ -90,14 +92,14 @@ def test_memory_info():
 
 def test_memory_total():
     v = m.cudaGetMemTotal(0, ignore=True)
-    assert isinstance(v, int)
+    assert type(v) in integer_types
 
 
 def test_memory_free():
     v = m.cudaGetMemFree(0, ignore=True)
-    assert isinstance(v, int)
+    assert type(v) in integer_types
 
 
 def test_memory_used():
     v = m.cudaGetMemUsed(0, ignore=True)
-    assert isinstance(v, int)
+    assert type(v) in integer_types
