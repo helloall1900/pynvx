@@ -71,7 +71,7 @@ invoke CMake and build the pybind11 module as specified in `CMakeLists.txt`.
 
 ## APIs
 
-see [API](https://github.com/1132719438/pynvx/blob/master/API.md)
+See [API](https://github.com/1132719438/pynvx/blob/master/API.md)
 
 ## Special notes for Windows
 
@@ -99,6 +99,10 @@ terms and conditions of this license.
 
 ### Pynvx
 Pynvx is provided under MIT License, see LICENSE file.
+
+## Troubleshooting
+
+If you have problem while installing Pynvx, see [TROUBLESHOOTING](https://github.com/1132719438/pynvx/blob/master/TROUBLESHOOTING.md) before opening an issue.
 
 ## Test & Example
 
