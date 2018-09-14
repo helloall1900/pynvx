@@ -51,10 +51,10 @@ cudaGetComputeCapability(handle) -> List[int]
 cudaGetMajor(handle) -> int
 > Get CUDA major revision numbers defining the device's compute capability.
 
-**cudaGetMemFree**
+**cudaGetMinor**
 
-cudaGetMemFree(handle) -> int
-> Get CUDA free memory of the device.
+cudaGetMinor(handle) -> int
+> Get CUDA minor revision numbers defining the device's compute capability.
 
 **cudaGetMemInfo**
 
@@ -66,15 +66,15 @@ cudaGetMemInfo(handle) -> List[int]
 cudaGetMemTotal(handle) -> int
 > Get CUDA total memory of the device.
 
+**cudaGetMemFree**
+
+cudaGetMemFree(handle) -> int
+> Get CUDA free memory of the device.
+
 **cudaGetMemUsed**
 
 cudaGetMemUsed(handle) -> int
 > Get CUDA used memory of the device.
-
-**cudaGetMinor**
-
-cudaGetMinor(handle) -> int
-> Get CUDA minor revision numbers defining the device's compute capability.
 
 **cudaGetMultiProcessorCount**
 
