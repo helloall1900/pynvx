@@ -18,6 +18,16 @@
 A Python interface to get GPU information, built with [pybind11](https://github.com/pybind/pybind11). The main purpose of this project is providing a solution for managing GPU information on OS X, because there is no NVML library on OS X. For Linux and Windows users, [pyNVML](https://pythonhosted.org/nvidia-ml-py/) is recommended.
 
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [APIs](#apis)
+- [Special notes for Windows](#special-notes-for-windows)
+- [License](#license)
+- [Troubleshooting](#troubleshooting)
+- [Test & Example](#test--example)
+
 ## Prerequisites
 
 ### 1. CUDA
