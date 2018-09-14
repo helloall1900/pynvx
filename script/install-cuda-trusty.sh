@@ -3,12 +3,18 @@
 # Adopted from https://github.com/tmcdonell/travis-scripts/blob/dfaac280ac2082cd6bcaba3217428347899f2975/install-cuda-trusty.sh
 #
 # Install the core CUDA toolkit for a ubuntu-trusty (14.04) system. Requires the
-# CUDA environment variable to be set to the required version.
+# CUDA_VERSION environment variable to be set to the required version.
 #
 # Since this script updates environment variables, to execute correctly you must
 # 'source' this script, rather than executing it in a sub-process.
 #
 set -e
+
+# Available CUDA versions
+# CUDA8    8.0.44-1
+# CUDA9.0  9.0.176_384.81
+# CUDA9.1  9.1.85_387.26
+# CUDA9.2  9.2.148_396.37
 
 # CUDA 8 we can use the repo
 if [[ ${CUDA_VERSION:0:1} = '8' ]]
@@ -44,7 +50,11 @@ else
     echo "CUDA version not specified or invalid version specified!"
     exit 1
 fi
-export CUDA_HOME=/usr/local/cuda-${CUDA_VERSION:0:3}
+
+sudo ln -s /usr/local/cuda-${CUDA_VERSION:0:3} /usr/local/cuda
+export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 export PATH=${CUDA_HOME}/bin:${PATH}
 export CUDA_BIN_PATH=${CUDA_HOME}
+
+set  +e
