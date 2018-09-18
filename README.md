@@ -12,8 +12,10 @@
 # Pynvx
 > Python bindings for NVIDIA CUDA APIs.
 
+[![PyPI](https://img.shields.io/pypi/v/pynvx.svg)](https://pypi.python.org/pypi/pynvx)
 [![Build Status](https://travis-ci.org/1132719438/pynvx.svg?branch=master)](https://travis-ci.org/1132719438/pynvx)
 [![Build status](https://ci.appveyor.com/api/projects/status/0dv4jdx38uyprt7o/branch/master?svg=true)](https://ci.appveyor.com/project/1132719438/pynvx/branch/master)
+[![Release Version](https://img.shields.io/github/release/1132719438/pynvx.svg)](https://github.com/1132719438/pynvx/releases)
 
 A Python interface to get GPU information, built with [pybind11](https://github.com/pybind/pybind11). The main purpose of this project is providing a solution for managing GPU information on OS X, because there is no NVML library on OS X. For Linux and Windows users, [pyNVML](https://pythonhosted.org/nvidia-ml-py/) is recommended.
 
