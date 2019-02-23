@@ -4,7 +4,7 @@ import sys
 import platform
 import subprocess
 
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 
@@ -75,9 +75,10 @@ setup(
     author_email='lijinpeng1132@gmail.com',
     description='Python bindings for NVIDIA CUDA APIs.',
     long_description=open_file("README.rst").read(),
-    url='https://github.com/1132719438/pynvx.git',
+    url='https://github.com/1132719438/pynvx',
 
-    ext_modules=[CMakeExtension('pynvx')],
+    packages=find_packages(),
+    ext_modules=[CMakeExtension('_pynvx')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
     tests_require=['pytest'],
@@ -94,11 +95,6 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.0",
-        "Programming Language :: Python :: 3.1",
-        "Programming Language :: Python :: 3.2",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",

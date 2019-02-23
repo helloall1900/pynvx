@@ -241,7 +241,7 @@ size_t cudaGetMemUsed(int deviceId, py::args args, py::kwargs kwargs) {
 }
 
 
-PYBIND11_MODULE(pynvx, m) {
+PYBIND11_MODULE(_pynvx, m) {
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;
 #else
