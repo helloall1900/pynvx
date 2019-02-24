@@ -1,5 +1,6 @@
-include README.md README.rst LICENSE API.md
+include README.md README.rst LICENSE API.md WRAPPER.md
 global-include CMakeLists.txt *.cmake
 recursive-include src *
 recursive-include tests *
 recursive-include pybind11/include *.h
+recursive-include pynvx *
