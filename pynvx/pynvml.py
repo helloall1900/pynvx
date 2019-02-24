@@ -49,6 +49,10 @@ def _cudaDeviceGetMemoryInfo(handle):
     info = pynvx.cudaGetMemInfo(handle)
     return GPUMemory(*info)
 
+def _cudaSystemGetDriverVersion():
+    version = pynvx.cudaSystemGetDriverVersion()
+    return str(version)
+
 
 def _not_implemented_func(*args, **kwargs):
     raise RuntimeError('Not implemented by pynvx, contribution is welcomed: '
@@ -83,7 +87,9 @@ if _is_osx:
         'nvmlDeviceGetHandleByIndex': _cudaDeviceGetHandleByIndex,
         'nvmlDeviceGetIndex': _cudaDeviceGetIndex,
         'nvmlDeviceGetMemoryInfo': _cudaDeviceGetMemoryInfo,
-        'nvmlDeviceGetName': getattr(pynvx, 'cudaGetName')
+        'nvmlDeviceGetName': getattr(pynvx, 'cudaGetName'),
+        'nvmlSystemGetDriverVersion': _cudaSystemGetDriverVersion,
+        'nvmlSystemGetRuntimeVersion': getattr(pynvx, 'cudaSystemGetRuntimeVersion')
     }
 
     for func_name, _ in inspect.getmembers(pynvml, inspect.isroutine):
