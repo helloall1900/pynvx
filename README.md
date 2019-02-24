@@ -17,7 +17,11 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/0dv4jdx38uyprt7o/branch/master?svg=true)](https://ci.appveyor.com/project/1132719438/pynvx/branch/master)
 [![Release Version](https://img.shields.io/github/release/1132719438/pynvx.svg)](https://github.com/1132719438/pynvx/releases)
 
-A Python interface to get GPU information, built with [pybind11](https://github.com/pybind/pybind11). The main purpose of this project is providing a solution for managing GPU information on OS X, because there is no NVML library on OS X. For Linux and Windows users, [pyNVML](https://pythonhosted.org/nvidia-ml-py/) is recommended.
+A Python interface to get GPU information, built with [pybind11](https://github.com/pybind/pybind11). The main purpose of this project is providing a solution for managing GPU information on OS X, because there is no NVML library on OS X.
+
+You can use pynvx in two mode:
+- standalone API: `pynvx.cuda*`
+- pynvml wrapper: `pynvml.nvml*`, API call will be invoked to pynvml on Linux and Windows, or pynvx on OS X.
 
 
 ## Table of Contents
@@ -29,6 +33,7 @@ A Python interface to get GPU information, built with [pybind11](https://github.
 - [License](#license)
 - [Troubleshooting](#troubleshooting)
 - [Test & Example](#test--example)
+- [Special Thanks](#special-thanks)
 
 ## Prerequisites
 
@@ -83,7 +88,18 @@ invoke CMake and build the pybind11 module as specified in `CMakeLists.txt`.
 
 ## APIs
 
-See [API](https://github.com/1132719438/pynvx/blob/master/API.md)
+- standalone API
+
+  See [API](https://github.com/1132719438/pynvx/blob/master/API.md)
+
+- pynvml wrapper
+
+  Please install **pynvml** when use pynvx as pynvml wrapper:  
+  Python 3: `pip install nvidia-ml-py3`  
+  Python 2: `pip install nvidia-ml-py`
+
+  see [WRAPPER](https://github.com/1132719438/pynvx/blob/master/WRAPPER.md)
+
 
 ## Special notes for Windows
 
@@ -110,7 +126,8 @@ Pybind11 is provided under a BSD-style license that can be found in the LICENSE 
 terms and conditions of this license.
 
 ### Pynvx
-Pynvx is provided under MIT License, see LICENSE file.
+
+Pynvx is provided under MIT License, see [LICENSE](https://github.com/1132719438/pynvx/blob/master/LICENSE) file.
 
 ## Troubleshooting
 
@@ -118,7 +135,19 @@ If you have problem while installing Pynvx, see [TROUBLESHOOTING](https://github
 
 ## Test & Example
 
-See [test.py](https://github.com/1132719438/pynvx/blob/master/tests/test.py) and [info.py](https://github.com/1132719438/pynvx/blob/master/tests/info.py).
+- test case  
+  [test.py](https://github.com/1132719438/pynvx/blob/master/tests/test.py)
+
+- standalone API example  
+  [info.py](https://github.com/1132719438/pynvx/blob/master/tests/info.py)
+
+- pynvml wrapper API example  
+  [wrapper.py](https://github.com/1132719438/pynvx/blob/master/tests/wrapper.py)
+
+
+## Special Thanks
+- Thanks [stas00](https://github.com/stas00) for the idea of pynvml wrapper and helping to test.
+
 
 [FAQ]: http://pybind11.rtfd.io/en/latest/faq.html#working-with-ancient-visual-studio-2009-builds-on-windows
 [vs2015_runtime]: https://www.microsoft.com/en-us/download/details.aspx?id=48145
