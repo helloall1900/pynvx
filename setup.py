@@ -68,7 +68,7 @@ def open_file(path, mode="r", encoding="UTF-8"):
 setup(
     name='pynvx',
     version='0.0.4',
-    keywords=("cuda", "python", "nvidia", "gpu", "macos", "OS X"),
+    keywords=["cuda", "python", "nvidia", "gpu", "macos", "OS X"],
     license="MIT Licence",
 
     author='lijinpeng',
@@ -77,7 +77,7 @@ setup(
     long_description=open_file("README.rst").read(),
     url='https://github.com/1132719438/pynvx',
 
-    packages=find_packages(),
+    packages=find_packages(exclude=['pybind11', 'docs', 'tests*']),
     ext_modules=[CMakeExtension('_pynvx')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,

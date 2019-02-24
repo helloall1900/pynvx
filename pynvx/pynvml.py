@@ -5,7 +5,13 @@ import platform
 import inspect
 from collections import namedtuple
 from functools import wraps
-import pynvml
+
+try:
+    import pynvml
+except ModuleNotFoundError:
+    raise ModuleNotFoundError('You should install pynvml.\n'
+                              'Python 3: pip install nvidia-ml-py3\n'
+                              'Python 2: pip install nvidia-ml-py')
 from pynvml import NVMLError
 
 
@@ -91,3 +97,5 @@ else:
     for func_name, func in inspect.getmembers(pynvml, inspect.isroutine):
         if func_name.startswith('nvml'):
             setattr(_this_module, func_name, func)
+
+setattr(_this_module, 'NVMLError', NVMLError)
