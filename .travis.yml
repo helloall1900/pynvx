@@ -9,35 +9,22 @@ matrix:
   - os: linux
     env: PYTHON=3.4
          CUDA_VERSION="9.1.85_387.26"
-  - os: linux
-    env: CONDA=2.7
-         CUDA_VERSION="9.1.85_387.26"
-  - os: linux
-    env: CONDA=3.6
-         CUDA_VERSION="9.1.85_387.26"
   - os: osx
     env: PYTHON=2.7
          CUDA_VERSION="9.1.128"
   - os: osx
     env: PYTHON=3.6
          CUDA_VERSION="9.1.128"
-  - os: osx
-    env: CONDA=2.7
-         CUDA_VERSION="9.1.128"
-  - os: osx
-    env: CONDA=3.6
-         CUDA_VERSION="9.1.128"
 before_install:
 - |
-  if [ "${PYTHON:0:1}" = "2" -o "${CONDA:0:1}" = "2" ]; then
-    export PY=python2
-  elif [ "${PYTHON:0:1}" = "3" -o "${CONDA:0:1}" = "3" ]; then
-    export PY=python3
-  fi
   if [ "${PYTHON:0:1}" = "2" ]; then
+    export PY=python2
     export PIP=pip2
+    export PYNVML=nvidia-ml-py
   elif [ "${PYTHON:0:1}" = "3" ]; then
+    export PY=python3
     export PIP=pip3
+    export PYNVML=nvidia-ml-py3
   fi
 
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
@@ -49,40 +36,22 @@ before_install:
     source ./script/install-cuda-osx.sh
   fi
 
-  if [ -n "$PYTHON" ]; then
-    ${PIP} install --user --disable-pip-version-check --no-warn-script-location --upgrade pip virtualenv
+  ${PIP} install --user --disable-pip-version-check --no-warn-script-location --upgrade pip virtualenv
 
-    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-      echo $PATH | grep -q "/Users/travis/Library/Python/$PYTHON/bin"
-      if [ $? -eq 0 ]; then
-        export PATH="/Users/travis/Library/Python/$PYTHON/bin:$PATH"
-      fi
+  if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+    echo $PATH | grep -q "/Users/travis/Library/Python/$PYTHON/bin"
+    if [ $? -eq 0 ]; then
+      export PATH="/Users/travis/Library/Python/$PYTHON/bin:$PATH"
     fi
-
-    virtualenv -p python$PYTHON venv$PYTHON
-    source venv$PYTHON/bin/activate
-    ${PIP} install --upgrade pytest
-  elif [ -n "$CONDA" ]; then
-    if [ "$TRAVIS_OS_NAME" = "linux" ]; then OS=Linux-x86_64; else OS=MacOSX-x86_64; fi
-    wget -O miniconda.sh https://repo.continuum.io/miniconda/Miniconda${CONDA:0:1}-latest-$OS.sh
-    bash miniconda.sh -b -p $HOME/miniconda
-    export PATH="$HOME/miniconda/bin:$PATH"
-    conda config --set always_yes yes --set changeps1 no
-    conda config --add channels conda-forge
-    conda update -q conda
-    conda install -q conda-build
-    conda create -q -n cvenv$CONDA python=$CONDA
-    source activate cvenv$CONDA
-    conda install -q pytest
   fi
+
+  virtualenv -p python$PYTHON venv$PYTHON
+  source venv$PYTHON/bin/activate
+  ${PIP} install --upgrade pytest
+  ${PIP} install --upgrade $PYNVML
 install:
 - |
-  if [ -n "$PYTHON" ]; then
-    ${PY} setup.py install
-  elif [ -n "$CONDA" ]; then
-    conda build conda.recipe
-    conda install --use-local pynvx
-  fi
+  ${PY} setup.py install
 script:
 - |
   ${PY} -m pytest tests/test.py

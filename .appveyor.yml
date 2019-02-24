@@ -8,10 +8,6 @@ environment:
     CUDA_VERSION: 9.0
   - PYTHON: 36
     CUDA_VERSION: 9.0
-  - CONDA: 27
-    CUDA_VERSION: 9.0
-  - CONDA: 36
-    CUDA_VERSION: 9.0
 install:
 - cmd: |
     call .\script\install-cuda-win.cmd %CUDA_VERSION%
@@ -27,27 +23,17 @@ install:
     }
 
     git submodule update -q --init --recursive
-    if ($env:PYTHON) {
-      if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
-      $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
-      python -m pip install --no-warn-script-location --upgrade pip setuptools pytest
-    } elseif ($env:CONDA) {
-      if ($env:CONDA -eq "27") { $env:CONDA = "" }
-      if ($env:PLATFORM -eq "x64") { $env:CONDA = "$env:CONDA-x64" }
-      $env:PATH = "C:\Miniconda$env:CONDA\;C:\Miniconda$env:CONDA\Scripts\;$env:PATH"
-      conda config --set always_yes yes --set changeps1 no
-      conda config --add channels conda-forge
-      conda update -q conda
-      conda install -q conda-build
-      conda install -q pytest
+
+    if ($env:PLATFORM -eq "x64") { $env:PYTHON = "$env:PYTHON-x64" }
+    if ($env:PYTHON -eq "27") {
+      $env:PYNVML = "nvidia-ml-py"
+    } else {
+      $env:PYNVML = "nvidia-ml-py3"
     }
+    $env:PATH = "C:\Python$env:PYTHON\;C:\Python$env:PYTHON\Scripts\;$env:PATH"
+    python -m pip install --no-warn-script-location --upgrade pip setuptools pytest $env:PYNVML
 build_script:
 - ps: |
-    if ($env:PYTHON) {
-      python setup.py install
-    } else {
-      conda build conda.recipe
-      conda install --use-local pynvx
-    }
+    python setup.py install
 test_script:
 - ps: python -m pytest tests\test.py

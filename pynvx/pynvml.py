@@ -8,10 +8,10 @@ from functools import wraps
 
 try:
     import pynvml
-except ModuleNotFoundError:
-    raise ModuleNotFoundError('You should install pynvml.\n'
-                              'Python 3: pip install nvidia-ml-py3\n'
-                              'Python 2: pip install nvidia-ml-py')
+except ImportError:
+    raise ImportError('You should install pynvml.\n'
+                      'Python 3: pip install nvidia-ml-py3\n'
+                      'Python 2: pip install nvidia-ml-py')
 from pynvml import NVMLError
 
 
@@ -73,8 +73,8 @@ def wrapper(func):
 if _is_osx:
     try:
         import pynvx
-    except ModuleNotFoundError:
-        raise ModuleNotFoundError('You should install pynvx on OSX: pip install pynvx')
+    except ImportError:
+        raise ImportError('You should install pynvx on OSX: pip install pynvx')
 
     _pynvx_func_mapper = {
         'nvmlInit': getattr(pynvx, 'cudaInit'),
