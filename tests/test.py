@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import print_function, absolute_import, division
 
 import sys
 import pynvx as m
@@ -11,10 +11,7 @@ else:
     integer_types = [int]
 
 
-def test_version():
-    assert m.__version__ == '0.0.4'
-
-
+# test pynvx api
 def test_init():
     v = m.cudaInit(ignore=True)
     assert isinstance(v, int)
@@ -103,3 +100,14 @@ def test_memory_free():
 def test_memory_used():
     v = m.cudaGetMemUsed(0, ignore=True)
     assert type(v) in integer_types
+
+
+# test pynvml wrapper
+def test_pynvml_wrapper():
+    from pynvx import pynvml
+    from pynvx.pynvml import NVMLError
+
+    try:
+        pynvml.nvmlInit()
+    except NVMLError:
+        pass
