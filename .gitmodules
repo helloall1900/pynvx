@@ -1,0 +1,3 @@
+[submodule "pybind11"]
+	path = pybind11
+	url = https://github.com/pybind/pybind11/tree/5b0a6fc2017fcc176545afe3e09c9f9885283242/
